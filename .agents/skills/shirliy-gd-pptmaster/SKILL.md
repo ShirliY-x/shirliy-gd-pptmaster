@@ -1,17 +1,17 @@
 ---
 name: shirliy-gd-pptmaster
-description: Use this skill when the user needs a client-facing business proposal PPT image workflow for GeekDance. It guides Codex step by step through project understanding, text outline confirmation, visual style confirmation, overview image prompt creation, page-by-page 16:9 slide image prompt creation, and final review. The user-facing skill name is “Shirliy｜极客PPT大师”. Always ask for confirmation at each key step and include an option for “由 ShirliY AI 做决定”.
+description: Use this skill when the user needs a client-facing business proposal PPT preview image workflow for GeekDance. It guides Codex step by step through project understanding, text outline confirmation, visual style confirmation, whole-deck thumbnail overview preview image generation, page-by-page 16:9 single-slide preview image generation, and final review. The user-facing skill name is “Shirliy｜极客PPT大师”. Always ask for confirmation at each key step and include an option for “由 ShirliY AI 做决定”.
 ---
 
 # Shirliy｜极客PPT大师
 
 You are using the **Shirliy｜极客PPT大师** skill.
 
-This skill helps create **client-facing business proposal PPT page images** for GeekDance. The workflow is intentionally interactive and step by step. Do not rush from raw materials to final pages.
+This skill helps create **client-facing business proposal PPT preview images** for GeekDance. The workflow is intentionally interactive and step by step. Do not rush from raw materials to final pages.
 
 ## Core principle
 
-客户资料决定内容，公司参考图决定风格，大纲决定逻辑，总览图决定整体方向，逐页高清图决定最终质量。
+客户资料决定内容，公司参考图决定风格，大纲决定逻辑，总览预览图决定整体方向，逐页单页预览图决定最终质量。
 
 ## Absolute rules
 
@@ -21,8 +21,8 @@ This skill helps create **client-facing business proposal PPT page images** for 
 4. **Do not skip confirmation unless the user chooses “由 ShirliY AI 做决定”.**
 5. **Every key step must give clear options.**
 6. **Every key step must include one option: “由 ShirliY AI 做决定”.**
-7. The default output should be structured text, prompts, and review checklists.
-8. If image generation is available, generate only after the user confirms the current step.
+7. The default output should be structured text, direct preview images, and review checklists.
+8. Do not output image-generation prompts by default. Output the corresponding prompt only when the user explicitly asks for it.
 9. In the page-by-page phase, handle **one slide page at a time**.
 10. The page ratio is always **16:9 horizontal** unless the user explicitly changes it.
 
@@ -36,8 +36,8 @@ Follow this order:
 4. Visual style confirmation
 5. Style material supplementation, if needed
 6. Style direction confirmation
-7. Whole-deck thumbnail overview prompt / image
-8. Page-by-page 16:9 single-slide image prompt
+7. Whole-deck thumbnail overview preview image
+8. Page-by-page 16:9 single-slide preview image
 9. Single-page modification flow, if needed
 10. Final review
 11. Final delivery method confirmation
@@ -89,7 +89,7 @@ Keep the interaction light. Ask only for the minimum necessary information.
 
 Clarify whether they want:
 
-A. PPT image generation workflow only
+A. PPT preview image generation workflow only
 B. Editable text outline only
 C. Final PPT assembly instructions
 D. 由 ShirliY AI 做决定
