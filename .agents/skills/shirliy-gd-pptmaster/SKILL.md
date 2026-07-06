@@ -1,6 +1,6 @@
 ---
 name: shirliy-gd-pptmaster
-description: Use this skill when the user needs a client-facing business proposal PPT preview image workflow for GeekDance. It guides Codex step by step through project understanding, text outline confirmation, visual style confirmation, whole-deck thumbnail overview preview image generation, page-by-page 16:9 single-slide preview image generation, and final review. The user-facing skill name is “Shirliy｜极客PPT大师”. Always ask for confirmation at each key step and include an option for “由 ShirliY AI 做决定”.
+description: Use this skill when the user needs a client-facing business proposal PPT preview image workflow for GeekDance. It guides Codex step by step through project understanding, text outline confirmation, visual style confirmation, whole-deck style overview preview image generation, page-by-page 16:9 single-slide preview image generation, and final review. The user-facing skill name is “Shirliy｜极客PPT大师”. Always ask for confirmation at each key step and include an option for “由 ShirliY AI 做决定”.
 ---
 
 # Shirliy｜极客PPT大师
@@ -20,16 +20,14 @@ This skill helps create **client-facing business proposal PPT preview images** f
 3. **Do not directly generate page images before project understanding and outline confirmation.**
 4. **Do not skip confirmation unless the user chooses “由 ShirliY AI 做决定”.**
 5. **Every key step must give clear options.**
-6. **Every key step must include one option: “由 ShirliY AI 做决定”.**
+6. **Every key step must include one option: “由 ShirliY AI 做决定”, except the overview confirmation and single-page confirmation stages where this skill defines fixed A/B/C options.**
 7. The default output should be structured text, direct preview images, and review checklists.
 8. Do not output image-generation prompts by default. Output the corresponding prompt only when the user explicitly asks for it.
 9. In the page-by-page phase, handle **one slide page at a time**.
 10. The page ratio is always **16:9 horizontal** unless the user explicitly changes it.
-11. In the whole-deck overview preview, every thumbnail page must preserve the original slide ratio, default 16:9.
-12. Never stretch, squeeze, warp, or otherwise distort slide thumbnails in the overview preview. Use proportional scaling only.
-13. Let the overview canvas expand as needed. Prioritize thumbnail readability and non-distortion over forcing every page into a fixed canvas.
-14. Choose the overview grid automatically based on page count, such as 3x5, 4x4, or 2x6.
-15. The overview canvas size is adjustable and expandable; when there are many pages, enlarge the overview image instead of compressing individual slide ratios.
+11. Do not generate PPT files by default, do not output editable PPT files by default, and do not output PPT assembly instructions unless the user explicitly asks.
+12. All page results should be preview images: one whole-deck style overview preview image first, then 16:9 single-slide preview images.
+13. The overview preview image is not a multi-page collage or a collection of miniature pages. It is one complete large image that expresses the deck's overall style, layout system, and visual direction.
 
 ## Required workflow
 
@@ -41,11 +39,11 @@ Follow this order:
 4. Visual style confirmation
 5. Style material supplementation, if needed
 6. Style direction confirmation
-7. Whole-deck thumbnail overview preview image
-8. Page-by-page 16:9 single-slide preview image
-9. Single-page modification flow, if needed
-10. Final review
-11. Final delivery method confirmation
+7. Whole-deck style overview preview image, not a thumbnail collage
+8. Overview confirmation: generate first slide, generate all slides, or revise style
+9. Page-by-page 16:9 single-slide preview image, or batch-generate all 16:9 single-slide preview images
+10. Single-page modification flow, if needed
+11. Final review
 
 For the full workflow, read `references/workflow.md`.
 
@@ -88,17 +86,22 @@ D. 由 ShirliY AI 做决定
 
 Keep the interaction light. Ask only for the minimum necessary information.
 
-For the overview preview size, offer:
+After generating the overview preview image, show only:
 
 ```text
-请选择总览预览尺寸：
-A. 标准预览
-B. 大尺寸预览
-C. 超清总览
-D. 由 ShirliY AI 做决定
+请选择：
+A. 生成第一张
+B. 一次性生成所有
+C. 重新修改风格
 ```
 
-Default to **D. 由 ShirliY AI 做决定** and choose the layout that best preserves page ratio, readability, and non-distorted thumbnails.
+Interpret these overview options strictly:
+
+- A means generate the first 16:9 single-slide preview image using the confirmed style and outline.
+- B means generate every 16:9 single-slide preview image in one batch using the confirmed style and outline.
+- C means return to style adjustment, reconfirm the style direction, then generate a new overview preview image.
+
+Do not show overview size choices or multi-page collage choices.
 
 For every page-by-page single-slide preview, show only:
 
@@ -131,7 +134,7 @@ Clarify whether they want:
 
 A. PPT preview image generation workflow only
 B. Editable text outline only
-C. Final PPT assembly instructions
+C. Final image delivery instructions
 D. 由 ShirliY AI 做决定
 
 Do not assume they want an editable PPT file.
