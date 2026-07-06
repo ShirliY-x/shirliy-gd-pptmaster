@@ -1,0 +1,13 @@
+# macOS / system
+.DS_Store
+
+# temporary outputs
+*.tmp
+*.log
+
+# generated slide/image outputs
+outputs/
+exports/
+
+# local extracted package staging copy
+/shirliy-gd-pptmaster/
