@@ -7,9 +7,9 @@
 
 当用户选择「采用公司风格」时，必须默认使用本风格。
 
-## 默认背景
+## 固定模板背景
 
-默认背景文件：
+默认固定模板背景文件：
 
 ```text
 assets/geekdance-default-background.jpg
@@ -18,12 +18,30 @@ assets/geekdance-default-background.jpg
 使用规则：
 
 1. 页面比例固定为 **16:9 横版**。
-2. 背景图铺满整页。
-3. 不得裁切或遮挡右上角 GeekDance Logo。
-4. 保留顶部浅色 GeekDance 大水印作为品牌识别。
-5. 页面内容应避开右上角 Logo 区域。
-6. 页面主体内容优先放在左侧、中部或下方留白区域。
-7. 内容较多时，使用白色半透明圆角卡片承载。
+2. 必须将 `assets/geekdance-default-background.jpg` 作为固定母版模板直接使用。
+3. 不要重新生成背景，不要从零自由生成整页背景。
+4. 所有页面都应在该背景模板之上叠加内容。
+5. 背景图铺满整页，不得裁切、拉伸变形或遮挡模板现有元素。
+6. 页面内容应避开右上角 Logo 区域。
+7. 页面主体内容优先放在左侧、中部或下方留白区域。
+8. 内容较多时，使用白色半透明圆角卡片承载。
+
+## 锁定模板元素
+
+右上角 GeekDance Logo 是锁定区域，必须保持模板原样：
+
+1. 不允许移动。
+2. 不允许缩放。
+3. 不允许改色。
+4. 不允许重绘。
+5. 不允许替换。
+6. 不允许加特效。
+7. 不要生成新的英文 GeekDance logo。
+8. 不要把原 Logo 替换成新 Logo。
+
+顶部浅色 GeekDance 大字水印也是模板固定元素，必须保持原样，不要重新设计、重绘、移动、替换或加特效。
+
+公司风格页面生成逻辑：页面是在固定模板上排版，不是自由生成整页。先使用模板作为页面底板，再把标题、正文、图表、卡片、图标和项目视觉元素叠加到模板留白区域。
 
 ## 整体视觉
 
@@ -32,6 +50,7 @@ assets/geekdance-default-background.jpg
 - 红色作为品牌点缀色，不大面积滥用。
 - 顶部保留超大浅色 GeekDance 品牌水印。
 - 右上角保留 GeekDance Logo 的清晰识别。
+- 右上角 Logo 和顶部水印来自固定模板，不可编辑、不可重绘、不可替换。
 - 页面要有留白感，不要信息堆满。
 
 ## 配色
@@ -76,7 +95,7 @@ assets/geekdance-default-background.jpg
 ### 封面页
 
 - 使用大标题 + 项目副标题 + 汇报单位 + 日期。
-- 背景使用 GeekDance 通用背景。
+- 背景使用固定 GeekDance 通用模板背景。
 - 可以加入项目相关视觉元素，但不要遮挡右上角 Logo。
 
 ### 目录 / 分割页
@@ -138,8 +157,8 @@ assets/geekdance-default-background.jpg
 
 ## 生图 Prompt 固定附加要求
 
-当生成公司风格页面 Prompt 时，必须附加：
+当生成公司风格页面 Prompt 或预览图时，必须附加：
 
 ```text
-16:9 horizontal business proposal PPT page, use GeekDance default background, white and pale gray clean corporate technology style, large subtle GeekDance watermark feel, clear top-right GeekDance logo area, red accent color, rounded white cards, soft shadow, light red outlines, clean typography hierarchy, premium consulting deck layout, suitable for client-facing business proposal, no blue dashboard style, no generic template look, no copied content from references.
+16:9 horizontal business proposal PPT page, use assets/geekdance-default-background.jpg as the fixed master template background, compose content on top of the template rather than generating the full page from scratch, preserve the existing top-right GeekDance logo exactly, logo is locked and non-editable, do not move scale recolor redraw replace or add effects to the logo, do not generate a new English GeekDance logo, preserve the large pale GeekDance watermark exactly as in the template, white and pale gray clean corporate technology style, red accent color, rounded white cards, soft shadow, light red outlines, clean typography hierarchy, premium consulting deck layout, suitable for client-facing business proposal, no blue dashboard style, no generic template look, no copied content from references.
 ```

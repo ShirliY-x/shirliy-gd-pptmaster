@@ -25,6 +25,11 @@ This skill helps create **client-facing business proposal PPT preview images** f
 8. Do not output image-generation prompts by default. Output the corresponding prompt only when the user explicitly asks for it.
 9. In the page-by-page phase, handle **one slide page at a time**.
 10. The page ratio is always **16:9 horizontal** unless the user explicitly changes it.
+11. In the whole-deck overview preview, every thumbnail page must preserve the original slide ratio, default 16:9.
+12. Never stretch, squeeze, warp, or otherwise distort slide thumbnails in the overview preview. Use proportional scaling only.
+13. Let the overview canvas expand as needed. Prioritize thumbnail readability and non-distortion over forcing every page into a fixed canvas.
+14. Choose the overview grid automatically based on page count, such as 3x5, 4x4, or 2x6.
+15. The overview canvas size is adjustable and expandable; when there are many pages, enlarge the overview image instead of compressing individual slide ratios.
 
 ## Required workflow
 
@@ -50,12 +55,18 @@ When the user chooses **A. 采用公司风格**, use **GeekDance Official Busine
 
 Required company style constraints:
 
-- Use `assets/geekdance-default-background.jpg` as the default full-page background.
+- 使用固定模板背景。
+- Logo 不可编辑。
+- 页面是在模板上排版，不是自由生成。
+- Use `assets/geekdance-default-background.jpg` as the fixed full-page master template background.
+- When using company style, do not regenerate, redesign, repaint, or replace the background. Place all new page content on top of the fixed template.
 - Keep the page ratio as 16:9 horizontal.
 - Use white / light gray / pale pink-white as the main background feeling.
 - Use GeekDance brand red as the accent color.
-- Keep the large pale GeekDance watermark feeling.
-- Keep the GeekDance logo area in the top right visually clear.
+- Keep the large pale GeekDance watermark exactly as it appears in the template; do not redesign it.
+- Treat the top-right GeekDance logo as a locked, non-editable region: do not move, scale, recolor, redraw, replace, or add effects to it.
+- Do not generate a new English GeekDance logo, and do not replace the original logo with a new logo.
+- Page generation must be template-based composition, not free full-page generation from scratch.
 - Use rounded white cards, light shadows, soft red outlines, red line icons, data cards, flow diagrams, architecture diagrams, matrices, timelines, and business-tech layouts.
 - Do not create a blue operations-dashboard style.
 - Do not create a generic PPT template style.
@@ -76,6 +87,35 @@ D. 由 ShirliY AI 做决定
 ```
 
 Keep the interaction light. Ask only for the minimum necessary information.
+
+For the overview preview size, offer:
+
+```text
+请选择总览预览尺寸：
+A. 标准预览
+B. 大尺寸预览
+C. 超清总览
+D. 由 ShirliY AI 做决定
+```
+
+Default to **D. 由 ShirliY AI 做决定** and choose the layout that best preserves page ratio, readability, and non-distorted thumbnails.
+
+For every page-by-page single-slide preview, show only:
+
+```text
+请选择：
+A. 这一页确认，继续下一页
+B. 修改这一页
+C. 一次性全部生成
+```
+
+Interpret these options strictly:
+
+- A means the current page is approved; continue with the next page.
+- B means enter the current-page modification flow; ask what the user wants changed, regenerate the current page, then show the same three options again.
+- C means the user approves the current style and page direction; generate all remaining slide preview images in one batch using the confirmed style, layout system, and content logic, then move to whole-deck review or page-by-page fine tuning.
+
+Do not show single-page options such as “重新生成这一页预览图” or “由 ShirliY AI 做决定”.
 
 ## Default language and tone
 
